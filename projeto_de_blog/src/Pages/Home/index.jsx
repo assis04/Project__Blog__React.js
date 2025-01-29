@@ -1,67 +1,46 @@
 import './style.css';
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import api from '../../services/api';
 
 function Home() {
-  const [posts, setPosts] = useState([])
-
-  const inputTitulo = useRef()
-  const texteareaConteudo = useRef()
+  const [posts, setPosts] = useState([]);
+  const navigate = useNavigate();
 
   async function getPosts() {
     try {
-      const postFromApi = await api.get('/posts')
-      setPosts(postFromApi.data)
+      const postFromApi = await api.get('/posts');
+      setPosts(postFromApi.data);
     } catch (error) {
-      console.error('Erro ao buscar posts:', error)
+      console.error('Erro ao buscar posts:', error);
     }
   }
 
-  async function createPosts()  {
-      await api.post('/posts', {
-        title: inputTitulo.current.value,
-        content: texteareaConteudo.current.value
-      })
-      getPosts()
-  }
-
   async function deletePosts(id) {
-    await api.delete(`/posts/${id}`)
-    getPosts()
+    await api.delete(`/posts/${id}`);
+    getPosts();
   }
 
   useEffect(() => {
-    getPosts()
-  }, [])
+    getPosts();
+  }, []);
 
   return (
-
     <div className='container'>
-      <form>
-        <h1>Crie seu post</h1>
-        <input placeholder='Título' name='titulo' type='text' ref={inputTitulo}/>
-        <textarea placeholder='Conteúdo' name='conteudo' type='text' ref={texteareaConteudo}/>
-        <button type='buttonadw' onClick={createPosts}>Postar</button>
-      </form>
-
-
+      <button className='button_NewPost' onClick={() => navigate('/create-post')}>Criar Novo Post</button>
       {posts.map(post => (
         <div key={post.id} className='card'>
           <div>
-            <p>Titulo: <span>{post.title}</span>  </p>
-            <p>Conteudo: <span>{post.content}</span> </p>
+            <p>Titulo: <Link className='linkPostId' to={`/posts/${post.id}`}>{post.title}</Link></p>
+            <p>Conteudo: <span>{post.content}</span></p>
           </div>
           <button onClick={() => deletePosts(post.id)}>
             <p>Trash</p>
           </button>
         </div>
-
       ))}
-
     </div>
-
-
-  )
+  );
 }
 
-export default Home
+export default Home;
