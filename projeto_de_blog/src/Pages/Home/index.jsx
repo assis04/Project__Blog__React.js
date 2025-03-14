@@ -1,5 +1,6 @@
 import './style.css';
 import { useState, useEffect, useRef } from 'react';
+import {Link} from 'react-router-dom';
 import api from '../../services/api';
 
 function Home() {
@@ -51,6 +52,9 @@ function Home() {
             <p>Titulo: <span>{post.title}</span>  </p>
             <p>Conteudo: <span>{post.content}</span> </p>
           </div>
+          <Link to={"/posts/" + post.id }>
+            <p>View</p>
+          </Link>
           <button onClick={() => deletePosts(post.id)}>
             <p>Trash</p>
           </button>
