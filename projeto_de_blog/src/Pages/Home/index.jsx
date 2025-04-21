@@ -116,6 +116,12 @@ function Home() {
               <p>Trash</p>
             </button>
           </div>
+          <Link to={"/posts/" + post.id }>
+            <p>View</p>
+          </Link>
+          <button onClick={() => deletePosts(post.id)}>
+            <p>Trash</p>
+          </button>
         </div>
       ))}
     </div>
