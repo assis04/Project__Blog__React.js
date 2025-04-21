@@ -21,11 +21,18 @@ form {
   width: 600px;
   margin-bottom: 20px;
 
+  & .form-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+  }
+
 
   & button {
     border-radius: 30px;
     background-color: #8d8ae1;
     height: 40px;
+    width: 200px;
     border: none;
     font-weight: bold;
     cursor: pointer;
