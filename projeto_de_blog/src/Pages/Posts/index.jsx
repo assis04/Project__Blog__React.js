@@ -25,8 +25,12 @@ function Post() {
 
   return (
     <div>
+    <button onClick={() => window.history.back()}>
+      <p> Tela inicial </p>
+    </button>
       <h1>{post.title}</h1>
       <p>{post.content}</p>
+      
     </div>
   );
 }
