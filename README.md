@@ -6,7 +6,7 @@ Nesse Blog é possivel:
 ➡️ Criar um post com título e conteudo;  
 ➡️ Exibir todos os posts cadastrados;  
 ➡️ Exibir um post com seu conteúdo;  
-## Como roda?
+## Como rodar?
 Pré requisitos:  
 Node v- 18 com NPM;  
 Cadastro e chave configurada no site do MongoDB: Link;  
