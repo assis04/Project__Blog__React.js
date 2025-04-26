@@ -2,7 +2,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding-top: 100px;
+  height: 100vh;
 }
 
 .button_NewPost{
@@ -14,6 +14,8 @@
   font-weight: bold;
   cursor: pointer;
   color: #fff;
+  margin-top: 20px;
+  margin-bottom: 20px;
 }
 
 .linkPostId{
@@ -27,23 +29,30 @@
   background-color: #2e2D4E;
   margin: 10px;
   padding: 10px;  
-  max-width: 50%;
-  width: 400px;
+  max-width: 95%;
+  width: 600px;
   border-radius: 10px;
   overflow: hidden;
 
-  & p {
+  & .titulo {
     color: #fff;
+    font-size: 1.5rem;
     font-weight: bold;
     max-width: 100%; 
     white-space: wrap;   
     overflow-y: hidden; 
     text-overflow: ellipsis;
-
-    & span{
-      font-weight: normal;
-    }
   }
+
+  & span{
+    color: #fff;
+    font-size: 1 rem;
+    max-width: 100%; 
+    white-space: wrap;   
+    overflow-y: hidden; 
+    text-overflow: ellipsis;
+  }
+
 
   & button {
     background-color: transparent;
@@ -54,4 +63,27 @@
   & button:hover{
     opacity: 0.5;
   }
+}
+
+.link{
+  text-decoration: none;
+}
+
+.card-actions{
+  display: flex;
+  gap: 10px;
+  flex-direction: column;
+}
+
+.colorWhite{
+  color: #fff;
+}
+
+.buttons{
+  display: flex;
+  gap: 20px;
+}
+
+.exibir{
+  display: none;
 }

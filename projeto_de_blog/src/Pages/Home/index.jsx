@@ -1,12 +1,16 @@
 import './style.css';
 import { useState, useEffect, useRef } from 'react';
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import DeleteIcon from '@mui/icons-material/Delete';
+import EditTwoToneIcon from '@mui/icons-material/EditTwoTone';
 import api from '../../services/api';
 
 function Home() {
   const [posts, setPosts] = useState([]);
+  const [exibe, setExibe] = useState(false);
+
   const [editingId, setEditingId] = useState(null);
-  
+
   const inputTitulo = useRef();
   const texteareaConteudo = useRef();
 
@@ -19,7 +23,10 @@ function Home() {
     }
   }
 
-  async function handleSubmit() {
+  async function handleSubmit(e = null) {
+    setExibe(false);
+    if (e != null) e.preventDefault();
+
     if (editingId) {
       await updatePost();
     } else {
@@ -62,12 +69,14 @@ function Home() {
   }
 
   function startEditing(post) {
+    setExibe(true);
     setEditingId(post.id);
     inputTitulo.current.value = post.title;
     texteareaConteudo.current.value = post.content;
   }
 
   function cancelEditing() {
+    setExibe(false)
     setEditingId(null);
     clearForm();
   }
@@ -83,10 +92,14 @@ function Home() {
 
   return (
     <div className='container'>
-      <form>
+      <button className={`button_NewPost {exibe ? '' : 'exibir'}`} onClick={() => setExibe(true)}>
+        <p>Crie seu post</p>
+      </button>
+
+      <form className={exibe ? '' : 'exibir'} onSubmit={(e) => handleSubmit(e)}>
         <h1>{editingId ? 'Editar post' : 'Crie seu post'}</h1>
-        <input placeholder='Título' name='titulo' type='text' ref={inputTitulo}/>
-        <textarea placeholder='Conteúdo' name='conteudo' type='text' ref={texteareaConteudo}/>
+        <input placeholder='Título' name='titulo' type='text' ref={inputTitulo} />
+        <textarea placeholder='Conteúdo' name='conteudo' type='text' ref={texteareaConteudo} />
         <div className="form-buttons">
           <button type='button' onClick={handleSubmit}>
             {editingId ? 'Atualizar' : 'Postar'}
@@ -99,29 +112,23 @@ function Home() {
         </div>
       </form>
 
+
       {posts.map(post => (
         <div key={post.id} className='card'>
           <div>
-            <p>Titulo: <span>{post.title}</span></p>
-            <p>Conteudo: <span>{post.content}</span></p>
-          </div>
-          <div className="card-actions">
-            <Link to={"/posts/" + post.id}>
-              <p>View</p>
+            <Link className='link' to={"/posts/" + post.id}>
+              <p className='titulo'>{post.title}</p>
+              <p> <span>{post.content}</span></p>
             </Link>
-            <button onClick={() => startEditing(post)}>
-              <p>Editar</p>
+          </div>
+          <div className='buttons'>
+            <button className='colorWhite' onClick={() => startEditing(post)}>
+              <EditTwoToneIcon />
             </button>
             <button onClick={() => deletePosts(post.id)}>
-              <p>Trash</p>
+              <DeleteIcon className='colorWhite' />
             </button>
           </div>
-          <Link to={"/posts/" + post.id }>
-            <p>View</p>
-          </Link>
-          <button onClick={() => deletePosts(post.id)}>
-            <p>Trash</p>
-          </button>
         </div>
       ))}
     </div>
