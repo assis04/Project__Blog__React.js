@@ -1,18 +1,10 @@
 import './style.css';
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import DeleteIcon from '@mui/icons-material/Delete';
-import EditTwoToneIcon from '@mui/icons-material/EditTwoTone';
 import api from '../../services/api';
 
 function Home() {
   const [posts, setPosts] = useState([]);
-  const [exibe, setExibe] = useState(false);
-
-  const [editingId, setEditingId] = useState(null);
-
-  const inputTitulo = useRef();
-  const texteareaConteudo = useRef();
 
   async function getPosts() {
     try {
@@ -23,68 +15,6 @@ function Home() {
     }
   }
 
-  async function handleSubmit(e = null) {
-    setExibe(false);
-    if (e != null) e.preventDefault();
-
-    if (editingId) {
-      await updatePost();
-    } else {
-      await createPost();
-    }
-  }
-
-  async function createPost() {
-    try {
-      await api.post('/posts', {
-        title: inputTitulo.current.value,
-        content: texteareaConteudo.current.value
-      });
-      clearForm();
-      getPosts();
-    } catch (error) {
-      console.error('Erro ao criar post:', error);
-    }
-  }
-
-  async function updatePost() {
-    try {
-      const currentPost = posts.find(post => post.id === editingId);
-      await api.put(`/posts/${editingId}`, {
-        ...currentPost,
-        title: inputTitulo.current.value,
-        content: texteareaConteudo.current.value
-      });
-      setEditingId(null);
-      clearForm();
-      getPosts();
-    } catch (error) {
-      console.error('Erro ao atualizar post:', error);
-    }
-  }
-
-  async function deletePosts(id) {
-    await api.delete(`/posts/${id}`);
-    getPosts();
-  }
-
-  function startEditing(post) {
-    setExibe(true);
-    setEditingId(post.id);
-    inputTitulo.current.value = post.title;
-    texteareaConteudo.current.value = post.content;
-  }
-
-  function cancelEditing() {
-    setExibe(false)
-    setEditingId(null);
-    clearForm();
-  }
-
-  function clearForm() {
-    inputTitulo.current.value = '';
-    texteareaConteudo.current.value = '';
-  }
 
   useEffect(() => {
     getPosts();
@@ -92,27 +22,9 @@ function Home() {
 
   return (
     <div className='container'>
-      <button className={`button_NewPost {exibe ? '' : 'exibir'}`} onClick={() => setExibe(true)}>
-        <p>Crie seu post</p>
-      </button>
-
-      <form className={exibe ? '' : 'exibir'} onSubmit={(e) => handleSubmit(e)}>
-        <h1>{editingId ? 'Editar post' : 'Crie seu post'}</h1>
-        <input placeholder='Título' name='titulo' type='text' ref={inputTitulo} />
-        <textarea placeholder='Conteúdo' name='conteudo' type='text' ref={texteareaConteudo} />
-        <div className="form-buttons">
-          <button type='button' onClick={handleSubmit}>
-            {editingId ? 'Atualizar' : 'Postar'}
-          </button>
-          {editingId && (
-            <button type='button' onClick={cancelEditing}>
-              Cancelar
-            </button>
-          )}
-        </div>
-      </form>
-
-
+    <Link to="/Admin" className='button'>
+      Admin
+    </Link>
       {posts.map(post => (
         <div key={post.id} className='card'>
           <div>
@@ -122,12 +34,7 @@ function Home() {
             </Link>
           </div>
           <div className='buttons'>
-            <button className='colorWhite' onClick={() => startEditing(post)}>
-              <EditTwoToneIcon />
-            </button>
-            <button onClick={() => deletePosts(post.id)}>
-              <DeleteIcon className='colorWhite' />
-            </button>
+            
           </div>
         </div>
       ))}

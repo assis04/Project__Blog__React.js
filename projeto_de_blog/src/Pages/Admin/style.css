@@ -16,6 +16,7 @@
   color: #fff;
   margin-top: 20px;
   margin-bottom: 20px;
+  text-decoration: none;
 }
 
 .linkPostId{
@@ -63,10 +64,6 @@
   & button:hover{
     opacity: 0.5;
   }
-}
-
-.link{
-  text-decoration: none;
 }
 
 .card-actions{
