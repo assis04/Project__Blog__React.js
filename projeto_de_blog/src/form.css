@@ -1,0 +1,7 @@
+
+.right-column-button-vertical {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  /* gap: 2rem; */
+}

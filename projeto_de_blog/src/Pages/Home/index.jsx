@@ -23,8 +23,9 @@ function Home() {
 
   return (
     <div className='container'>
-      <Link to="/Admin" className='button'>
+      <Link to="/Admin" className='button btn-purple'>
         <AdminPanelSettingsOutlinedIcon />
+        <span>Admin</span>
       </Link>
       {posts.map(post => (
         <div key={post.id} className='card'>

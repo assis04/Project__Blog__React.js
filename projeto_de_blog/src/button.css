@@ -1,0 +1,43 @@
+
+/* DEFAULTS */
+
+button {
+  background-color: transparent;
+  border: none;
+}
+button:hover {
+  cursor: pointer;
+}
+
+a {
+  text-decoration: none;
+}
+
+a:visited {
+  color: white;
+}
+
+.button {
+  color: white;
+  /* border: 2px solid #00000022; */
+  border-radius: 5px;
+  padding: 5px 10px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-items: center;
+}
+
+.btn-purple {
+  background-color: #3d3c63;
+}
+
+.miniButton {
+  color: white;
+  border-radius: 5px;
+  padding: 2px 2px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-items: center;
+}

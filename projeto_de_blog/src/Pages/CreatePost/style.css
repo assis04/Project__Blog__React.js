@@ -21,17 +21,6 @@ form {
     font-size: 32px;
   }
 
-  /* & button {
-    border-radius: 30px;
-    background-color: #8d8ae1;
-    height: 40px;
-    width: 200px;
-    border: none;
-    font-weight: bold;
-    cursor: pointer;
-    color: #fff;
-  } */
-
   & button:hover {
     opacity: 0.8;
   }
