@@ -1,9 +1,4 @@
-.container{
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  height: 100%;
-}
+
 
 .button_NewPost{
   border-radius: 30px;
@@ -23,53 +18,6 @@
   text-decoration: none;
   font-size: 1.3em;
   color: #fff;
-}
-.card {
-  display: flex;
-  justify-content: space-between;
-  background-color: #2e2D4E;
-  margin: 10px;
-  padding: 10px;  
-  max-width: 95%;
-  width: 600px;
-  border-radius: 10px;
-  overflow: hidden;
-
-  & .titulo {
-    color: #fff;
-    font-size: 1.5rem;
-    font-weight: bold;
-    max-width: 100%; 
-    white-space: wrap;   
-    overflow-y: hidden; 
-    text-overflow: ellipsis;
-  }
-
-  & span{
-    color: #fff;
-    font-size: 1 rem;
-    max-width: 100%; 
-    white-space: wrap;   
-    overflow-y: hidden; 
-    text-overflow: ellipsis;
-  }
-
-
-  & button {
-    background-color: transparent;
-    border: none;
-    cursor: pointer;
-  }
-
-  & button:hover{
-    opacity: 0.5;
-  }
-}
-
-.card-actions{
-  display: flex;
-  gap: 10px;
-  flex-direction: column;
 }
 
 .colorWhite{
