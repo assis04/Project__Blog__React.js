@@ -1,7 +1,7 @@
 import './style.css';
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import AdminPanelSettingsIcon from '@mui/icons-material/AdminPanelSettings';
+import AdminPanelSettingsOutlinedIcon from '@mui/icons-material/AdminPanelSettingsOutlined';
 import api from '../../services/api';
 
 function Home() {
@@ -23,9 +23,9 @@ function Home() {
 
   return (
     <div className='container'>
-    <Link to="/Admin" className='button'>
-      <AdminPanelSettingsIcon />
-    </Link>
+      <Link to="/Admin" className='button'>
+        <AdminPanelSettingsOutlinedIcon />
+      </Link>
       {posts.map(post => (
         <div key={post.id} className='card'>
           <div>

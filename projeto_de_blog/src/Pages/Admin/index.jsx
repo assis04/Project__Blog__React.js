@@ -3,10 +3,11 @@ import { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditTwoToneIcon from '@mui/icons-material/EditTwoTone';
-import PostAddIcon from '@mui/icons-material/PostAdd';
+import PostAddOutlinedIcon from '@mui/icons-material/PostAddOutlined';
 import ControlPointIcon from '@mui/icons-material/ControlPoint';
 import UpdateIcon from '@mui/icons-material/Update';
 import CancelOutlinedIcon from '@mui/icons-material/CancelOutlined';
+import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
 import api from '../../services/api';
 
 function Admin() {
@@ -96,20 +97,26 @@ function Admin() {
 
   return (
     <div className='container'>
-      <button className={`button_NewPost {exibe ? '' : 'exibir'}`} onClick={() => setExibe(true)}>
-        <PostAddIcon />
-      </button>
+      <div className='navbar'>
+        <Link to="/" className='button'>
+          <HomeOutlinedIcon />
+        </Link>
+        <button className={`button {exibe ? '' : 'exibir'}`} onClick={() => setExibe(true)}>
+          <PostAddOutlinedIcon from  />
+        </button>
+
+      </div>
 
       <form className={exibe ? '' : 'exibir'} onSubmit={(e) => handleSubmit(e)}>
         <h1>{editingId ? 'Editar post' : 'Crie seu post'}</h1>
         <input placeholder='Título' name='titulo' type='text' ref={inputTitulo} />
         <textarea placeholder='Conteúdo' name='conteudo' type='text' ref={texteareaConteudo} />
         <div className="form-buttons">
-          <button type='button' onClick={handleSubmit}>
-            {editingId ? <UpdateIcon/> : <ControlPointIcon />}
+          <button className='button' type='button' onClick={handleSubmit}>
+            {editingId ? <UpdateIcon /> : <ControlPointIcon />}
           </button>
           {editingId && (
-            <button type='button' onClick={cancelEditing}>
+            <button className='button' type='button' onClick={cancelEditing}>
               <CancelOutlinedIcon />
             </button>
           )}
