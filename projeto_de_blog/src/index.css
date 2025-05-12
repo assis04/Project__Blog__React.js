@@ -21,7 +21,7 @@ body {
   height: 100%;
 }
 
-.button{
+/* .button{
   border-radius: 30px;
   background-color: #8d8ae1;
   height: 40px;
@@ -35,7 +35,7 @@ body {
   text-decoration: none;
   text-align: center;
   align-content: center;
-}
+} */
 
 .card {
   display: flex;

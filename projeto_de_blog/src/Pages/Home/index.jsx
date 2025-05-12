@@ -1,6 +1,7 @@
 import './style.css';
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import AdminPanelSettingsIcon from '@mui/icons-material/AdminPanelSettings';
 import api from '../../services/api';
 
 function Home() {
@@ -23,7 +24,7 @@ function Home() {
   return (
     <div className='container'>
     <Link to="/Admin" className='button'>
-      Admin
+      <AdminPanelSettingsIcon />
     </Link>
       {posts.map(post => (
         <div key={post.id} className='card'>

@@ -21,7 +21,7 @@ form {
     font-size: 32px;
   }
 
-  & button {
+  /* & button {
     border-radius: 30px;
     background-color: #8d8ae1;
     height: 40px;
@@ -30,7 +30,7 @@ form {
     font-weight: bold;
     cursor: pointer;
     color: #fff;
-  }
+  } */
 
   & button:hover {
     opacity: 0.8;

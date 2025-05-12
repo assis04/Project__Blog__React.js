@@ -3,6 +3,10 @@ import { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditTwoToneIcon from '@mui/icons-material/EditTwoTone';
+import PostAddIcon from '@mui/icons-material/PostAdd';
+import ControlPointIcon from '@mui/icons-material/ControlPoint';
+import UpdateIcon from '@mui/icons-material/Update';
+import CancelOutlinedIcon from '@mui/icons-material/CancelOutlined';
 import api from '../../services/api';
 
 function Admin() {
@@ -93,7 +97,7 @@ function Admin() {
   return (
     <div className='container'>
       <button className={`button_NewPost {exibe ? '' : 'exibir'}`} onClick={() => setExibe(true)}>
-        <p>Crie seu post</p>
+        <PostAddIcon />
       </button>
 
       <form className={exibe ? '' : 'exibir'} onSubmit={(e) => handleSubmit(e)}>
@@ -102,11 +106,11 @@ function Admin() {
         <textarea placeholder='Conteúdo' name='conteudo' type='text' ref={texteareaConteudo} />
         <div className="form-buttons">
           <button type='button' onClick={handleSubmit}>
-            {editingId ? 'Atualizar' : 'Postar'}
+            {editingId ? <UpdateIcon/> : <ControlPointIcon />}
           </button>
           {editingId && (
             <button type='button' onClick={cancelEditing}>
-              Cancelar
+              <CancelOutlinedIcon />
             </button>
           )}
         </div>
