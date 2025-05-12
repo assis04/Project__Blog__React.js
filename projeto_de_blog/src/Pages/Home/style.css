@@ -69,12 +69,6 @@
   text-decoration: none;
 }
 
-.card-actions{
-  display: flex;
-  gap: 10px;
-  flex-direction: column;
-}
-
 .colorWhite{
   color: #fff;
 }

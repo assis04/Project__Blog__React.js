@@ -33,9 +33,6 @@ function Home() {
               <p> <span>{post.content}</span></p>
             </Link>
           </div>
-          <div className='buttons'>
-            
-          </div>
         </div>
       ))}
     </div>

@@ -24,13 +24,16 @@ function Post() {
   }
 
   return (
-    <div>
-    <button onClick={() => window.history.back()}>
-      <p> Tela inicial </p>
-    </button>
-      <h1>{post.title}</h1>
-      <p>{post.content}</p>
-      
+    <div className='container'>
+        <button className='button' onClick={() => window.history.back()}>
+          <p> Tela inicial </p>
+        </button>
+        <div className='card'>
+          <div className='card-content'>
+            <h1 className='titulo'>{post.title}</h1>
+            <p><span>{post.content}</span></p>
+          </div>
+      </div>   
     </div>
   );
 }
