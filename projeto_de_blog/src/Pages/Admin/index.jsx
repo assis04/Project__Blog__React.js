@@ -22,7 +22,23 @@ function Admin() {
   async function getPosts() {
     try {
       const postFromApi = await api.get('/posts');
-      setPosts(postFromApi.data);
+      let posts = postFromApi.data
+
+      // const ret = "...";
+      // for (let i = 0; i < posts.length; i++) {
+      //   posts[i]['contentResumido'] = posts[i].content.slice(0, 20);
+      //   posts[i].contentResumido = `${posts[i].contentResumido} ${ret}`
+      // }
+
+      const ret = "...";
+      const caracteres = 100;
+      posts.map((p) => {
+        let string = p.content.slice(0, caracteres);
+        string = `${string} ${ret}`;
+        p['contentResumido'] = string;
+      })
+
+      setPosts(posts);
     } catch (error) {
       console.error('Erro ao buscar posts:', error);
     }
@@ -98,13 +114,14 @@ function Admin() {
   return (
     <div className='container'>
       <div className='navbar'>
-        <Link to="/" className='button'>
+        <Link to="/" className='button btn-purple'>
           <HomeOutlinedIcon />
+          <span>Home</span>
         </Link>
-        <button className={`button {exibe ? '' : 'exibir'}`} onClick={() => setExibe(true)}>
+        <button className={`button btn-purple {exibe ? '' : 'exibir'}`} onClick={() => setExibe(true)}>
           <PostAddOutlinedIcon from  />
+          <span>Criar Post</span>
         </button>
-
       </div>
 
       <form className={exibe ? '' : 'exibir'} onSubmit={(e) => handleSubmit(e)}>
@@ -129,15 +146,17 @@ function Admin() {
           <div>
             <Link className='link' to={"/posts/" + post.id}>
               <p className='titulo'>{post.title}</p>
-              <p> <span>{post.content}</span></p>
+              <p> <span>{post.contentResumido}</span></p>
             </Link>
           </div>
-          <div className='buttons'>
-            <button className='colorWhite' onClick={() => startEditing(post)}>
+          <div className='right-column-button-vertical'>
+            <button className='miniButton btn-purple'
+              onClick={() => startEditing(post)}>
               <EditTwoToneIcon />
             </button>
-            <button onClick={() => deletePosts(post.id)}>
-              <DeleteIcon className='colorWhite' />
+            <button className='miniButton btn-purple'
+              onClick={() => deletePosts(post.id)}>
+              <DeleteIcon />
             </button>
           </div>
         </div>
