@@ -1,9 +1,16 @@
 import './style.css';
 import { useState, useEffect, useRef } from 'react';
+import { Link } from 'react-router-dom';
+import PostAddOutlinedIcon from '@mui/icons-material/PostAddOutlined';
+import ControlPointIcon from '@mui/icons-material/ControlPoint';
+import UpdateIcon from '@mui/icons-material/Update';
+import CancelOutlinedIcon from '@mui/icons-material/CancelOutlined';
+import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
 import api from '../../services/api';
 
 function CreatePost() {
   const [posts, setPosts] = useState([]);
+  const [exibe, setExibe] = useState(false);
   const [editingId, setEditingId] = useState(null);
 
   const inputTitulo = useRef();
@@ -15,6 +22,15 @@ function CreatePost() {
       setPosts(postFromApi.data);
     } catch (error) {
       console.error('Erro ao buscar posts:', error);
+    }
+  }
+  async function handleSubmit(e = null) {
+    if (e != null) e.preventDefault();
+    
+    if (editingId) {
+      await updatePost();
+    } else {
+      await createPost();
     }
   }
 
@@ -47,15 +63,7 @@ function CreatePost() {
     }
   }
 
-  async function handleSubmit(e = null) {
-    if (e != null) e.preventDefault();
-    
-    if (editingId) {
-      await updatePost();
-    } else {
-      await createPost();
-    }
-  }
+  
 
   function cancelEditing() {
     setEditingId(null);
@@ -73,17 +81,29 @@ function CreatePost() {
 
   return (
     <div className='container'>
-      <form onSubmit = {(e) => handleSubmit(e)}>
+    <div className='navbar'>
+        <Link to="/" className='button btn-purple'>
+          <HomeOutlinedIcon />
+          <span>Home</span>
+        </Link>
+        <button className={`button btn-purple {exibe ? '' : 'exibir'}`} onClick={() => setExibe(true)}>
+          <PostAddOutlinedIcon />
+          <span>Criar Post</span>
+        </button>
+      </div>
+      <form className={exibe ? '' : 'exibir'} onSubmit={(e) => handleSubmit(e)}>
         <h1>{editingId ? 'Editar post' : 'Crie seu post'}</h1>
-        <input placeholder='Título' name='titulo' type='text' ref={inputTitulo}/>
-        <textarea placeholder='Conteúdo' name='conteudo' type='text' ref={texteareaConteudo}/>
+        <input className='cx_titulo_form' placeholder='Título' name='titulo' type='text' ref={inputTitulo} />
+        <textarea className='cx_conteudo_form' placeholder='Conteúdo' name='conteudo' type='text' ref={texteareaConteudo} />
         <div className="form-buttons">
-          <button type='button' onClick={handleSubmit}>
-            {editingId ? 'Atualizar' : 'Postar'}
+          <button className='button btn-purple' type='button' onClick={handleSubmit}>
+            {editingId ? <UpdateIcon /> : <ControlPointIcon />}
+            <span> Atualizar </span>
           </button>
           {editingId && (
-            <button type='button' onClick={cancelEditing}>
-              Cancelar
+            <button className='button btn-purple' type='button' onClick={cancelEditing}>
+              <CancelOutlinedIcon />
+              <span>Cancelar</span>
             </button>
           )}
         </div>

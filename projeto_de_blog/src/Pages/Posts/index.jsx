@@ -1,5 +1,8 @@
+import './style.css';
 import { useParams } from 'react-router-dom';
 import { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
 import api from '../../services/api';
 
 function Post() {
@@ -25,9 +28,10 @@ function Post() {
 
   return (
     <div className='container'>
-        <button className='button' onClick={() => window.history.back()}>
-          <p> Tela inicial </p>
-        </button>
+        <Link to={"/"} className='button btn-purple'>
+          <HomeOutlinedIcon />
+          <span>Home</span>
+        </Link>
         <div className='card'>
           <div className='card-content'>
             <h1 className='titulo'>{post.title}</h1>

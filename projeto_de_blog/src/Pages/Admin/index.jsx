@@ -19,6 +19,23 @@ function Admin() {
   const inputTitulo = useRef();
   const texteareaConteudo = useRef();
 
+  useEffect(() => {
+    security();
+    getPosts();
+  }, []);
+
+  function security(){
+    const logado = window.localStorage.getItem("Logado");
+    if(logado !== "true"){
+      alert("Você não está logado!");
+      window.location.href = "/login";
+    }
+  }
+
+  function logout(){
+    window.localStorage.removeItem("Logado");
+    window.location.href = "/";
+  }
   async function getPosts() {
     try {
       const postFromApi = await api.get('/posts');
@@ -107,9 +124,7 @@ function Admin() {
     texteareaConteudo.current.value = '';
   }
 
-  useEffect(() => {
-    getPosts();
-  }, []);
+  
 
   return (
     <div className='container'>
@@ -119,22 +134,27 @@ function Admin() {
           <span>Home</span>
         </Link>
         <button className={`button btn-purple {exibe ? '' : 'exibir'}`} onClick={() => setExibe(true)}>
-          <PostAddOutlinedIcon from  />
+          <PostAddOutlinedIcon />
           <span>Criar Post</span>
+        </button>
+        <button className='button btn-purple' onClick={logout}>
+          <span> Fazer Logout </span>
         </button>
       </div>
 
       <form className={exibe ? '' : 'exibir'} onSubmit={(e) => handleSubmit(e)}>
         <h1>{editingId ? 'Editar post' : 'Crie seu post'}</h1>
-        <input placeholder='Título' name='titulo' type='text' ref={inputTitulo} />
-        <textarea placeholder='Conteúdo' name='conteudo' type='text' ref={texteareaConteudo} />
+        <input className='cx_titulo_form' placeholder='Título' name='titulo' type='text' ref={inputTitulo} />
+        <textarea className='cx_conteudo_form' placeholder='Conteúdo' name='conteudo' type='text' ref={texteareaConteudo} />
         <div className="form-buttons">
-          <button className='button' type='button' onClick={handleSubmit}>
+          <button className='button btn-purple' type='button' onClick={handleSubmit}>
             {editingId ? <UpdateIcon /> : <ControlPointIcon />}
+            {editingId ? <span>Atualizar</span> : <span>Postar</span>}
           </button>
           {editingId && (
-            <button className='button' type='button' onClick={cancelEditing}>
+            <button className='button btn-purple' type='button' onClick={cancelEditing}>
               <CancelOutlinedIcon />
+              <span>Cancelar</span>
             </button>
           )}
         </div>

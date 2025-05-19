@@ -24,19 +24,20 @@ form {
   & button:hover {
     opacity: 0.8;
   }
+}
 
-  & input {
-    border: 1px solid #48456c;
-    border-radius: 30px;
-    height: 40px;
-    background-color: #363653;
-    color: #fff;
-    font-size: 16px;
-    padding-left: 10px;
-    outline: none;
-  }
+.cx_titulo_form {
+  border: 1px solid #48456c;
+  border-radius: 30px;
+  height: 40px;
+  background-color: #363653;
+  color: #fff;
+  font-size: 16px;
+  padding-left: 10px;
+  outline: none;
+}
 
-  & textarea {
+.cx_conteudo_form {
     border: 1px solid #48456c;
     border-radius: 10px;
     height: 300px;
@@ -48,4 +49,9 @@ form {
     padding-left: 10px;
     outline: none;
   }
-}
+
+.form-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+  }
