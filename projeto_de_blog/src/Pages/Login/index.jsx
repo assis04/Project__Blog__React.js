@@ -25,6 +25,9 @@ function Login(){
         console.log('Input em foco:', true);
     };
     function blurEmailInput () {
+        if (email.current.value != null && email.current.value != ""){
+            return
+        } 
         setEmailInputFocusState(false);
         console.log('Input perdeu foco:', false);
     };
@@ -34,6 +37,9 @@ function Login(){
         console.log('Input em foco:', true);
     };
     function blurSenhaInput () {
+        if (email.current.value != null && email.current.value != ""){
+            return
+        }   
         setSenhaInputFocusState(false);
         console.log('Input perdeu foco:', false);
     };
